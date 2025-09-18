@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BBQ Atoms — Demo Ordering Site</title>
+  <meta name="description" content="BBQ Atoms — demo food ordering website for portfolio. Add items to cart, see deals, leave reviews, contact for home delivery." />
+  <style>
+    :root{--accent:#d35400;--bg:#0f1724;--card:#0b1220;--muted:#98a0b3;color-scheme:dark}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;color:#e6eef8;background:linear-gradient(180deg,#071022 0%, #081426 100%);}
+    header{position:relative;}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border-bottom:1px solid rgba(255,255,255,0.03);background:rgba(0,0,0,0.6);position:absolute;top:0;left:0;right:0;z-index:10}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#ff7b3a,#ffb86b);display:flex;align-items:center;justify-content:center;font-weight:700;color:#181818}
+    h1{font-size:18px;margin:0}
+    nav a{color:#fff;text-decoration:none;margin-left:16px;font-weight:500}
+    .hero-banner{height:320px;background:url('https://images.pexels.com/photos/675951/pexels-photo-675951.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;position:relative}
+    .hero-banner::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.55)}
+    .hero-content{position:relative;z-index:1;}
+    .hero-content h2{font-size:42px;margin:0;font-weight:700}
+    .hero-content p{margin-top:8px;font-size:18px;color:#f3f3f3}
+    main{display:grid;grid-template-columns:1fr 360px;gap:24px;padding:24px}
+    .btn{background:var(--accent);border:none;color:#fff;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:14px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .card img{width:100%;height:140px;object-fit:cover;border-radius:8px;cursor:pointer}
+    .price{font-weight:700}
+    .cart{background:var(--card);padding:14px;border-radius:12px;height:fit-content;border:1px solid rgba(255,255,255,0.03)}
+    footer{padding:18px;text-align:center;color:var(--muted);font-size:13px}
+    .reviews, .contact, .about, .menu-section{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:12px;border-radius:12px;margin-top:14px}
+    .deal{background:linear-gradient(90deg,#ff7b3a,#ffb86b);padding:10px;border-radius:10px;color:#181818;font-weight:700}
+    .small{font-size:13px;color:var(--muted)}
+    @media(max-width:980px){main{grid-template-columns:1fr} .cart{order:2}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero-banner">
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo">BA</div>
+          <div>
+            <h1>BBQ Atoms</h1>
+            <div class="small">Authentic BBQ & Fast Food</div>
+          </div>
+        </div>
+        <nav>
+          <a href="#menu">Menu</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+      <div class="hero-content">
+        <h2>Welcome to BBQ Atoms</h2>
+        <p>Delicious BBQ & Fast Food — Delivered Fresh</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div id="menu" class="menu-section">
+        <h2>Our Menu</h2>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap">
+          <div class="deal">Today’s Deal: Burger + Small Pizza + Cold Drink — Rs. 950</div>
+          <div class="small">Free delivery over Rs. 1500</div>
+        </div>
+        <div class="grid" id="productGrid" style="margin-top:14px"></div>
+      </div>
+
+      <div id="reviews" class="reviews">
+        <h3>Reviews & Complaints</h3>
+        <form id="reviewForm" style="display:flex;gap:8px;flex-direction:column;margin-top:8px">
+          <input id="reviewName" placeholder="Your name" />
+          <textarea id="reviewText" placeholder="Write a review or complaint" rows="3"></textarea>
+          <button class="btn" type="button" id="submitReview">Submit</button>
+        </form>
+        <div class="review-list" id="reviewList" style="margin-top:10px"></div>
+      </div>
+
+      <div id="about" class="about">
+        <h3>About Us</h3>
+        <p>Welcome to BBQ Atoms! Founded by <b>Vinesh Kumar</b>, our mission is to bring authentic BBQ and fast food flavors of Pakistan to your doorstep. We focus on quality, freshness, and customer satisfaction. Whether it’s a juicy burger, spicy kabab, or a crispy broast, we make sure every bite counts. Enjoy our delicious meals with friends and family, and don’t forget to try our amazing deals!</p>
+      </div>
+
+      <div id="contact" class="contact">
+        <h3>Contact & Home Delivery</h3>
+        <p class="small">Owner: <b>Vinesh Kumar</b></p>
+        <p class="small">Email: <span id="ownerEmail">vineshjagwani@gmail.com</span></p>
+        <p class="small">Phone: 0315-3516936</p>
+        <form id="contactForm" style="display:flex;gap:8px;flex-direction:column;margin-top:8px">
+          <input id="contactName" placeholder="Your name" required />
+          <input id="contactPhone" placeholder="Phone or address" required />
+          <textarea id="contactMsg" placeholder="Message or delivery details" rows="3"></textarea>
+          <button class="btn" type="button" id="sendContact">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <aside>
+      <div class="cart">
+        <h3>Cart</h3>
+        <div class="cart-list" id="cartList"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+          <div class="small">Subtotal</div>
+          <div id="subtotal">Rs. 0</div>
+        </div>
+        <button class="btn" id="checkout">Checkout</button>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    Built for portfolio — demo only, no live payments.
+  </footer>
+
+<script>
+// Products with fixed HD stock images
+const products = [
+  {id:'burger', title:'Burger', price:400, img:'https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg', desc:'Juicy grilled burger with sauce.'},
+  {id:'roll', title:'Roll', price:300, img:'https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg', desc:'Hot and spicy roll.'},
+  {id:'kabab', title:'Seekh Kabab', price:350, img:'https://images.pexels.com/photos/62097/pexels-photo-62097.jpeg', desc:'Traditional seekh kabab.'},
+  {id:'sandwich', title:'Sandwich', price:400, img:'https://images.pexels.com/photos/1600711/pexels-photo-1600711.jpeg', desc:'Fresh sandwich with veggies.'},
+  {id:'broast', title:'Broast', price:500, img:'https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg', desc:'Crispy broast.'},
+  {id:'pizza_small', title:'Pizza (Small)', price:400, img:'https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg', desc:'Small pizza, perfect for one.'},
+  {id:'pizza_medium', title:'Pizza (Medium)', price:900, img:'https://images.pexels.com/photos/724216/pexels-photo-724216.jpeg', desc:'Medium pizza for sharing.'},
+  {id:'pizza_large', title:'Pizza (Large)', price:1500, img:'https://images.pexels.com/photos/724216/pexels-photo-724216.jpeg', desc:'Large family pizza.'},
+  {id:'coldrink', title:'Cold Drink', price:120, img:'https://images.pexels.com/photos/1616012/pexels-photo-1616012.jpeg', desc:'Chilled refreshing drink.'}
+];
+
+// Render products
+const grid = document.getElementById('productGrid');
+products.forEach(p=>{
+  const card = document.createElement('div'); card.className='card';
+  card.innerHTML = `
+    <img src="${p.img}" alt="${p.title}" />
+    <div style="margin-top:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700">${p.title}</div>
+          <div class="small">${p.desc}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="price">Rs. ${p.price}</div>
+        </div>
+      </div>
+      <button class="btn add" data-id="${p.id}">Add</button>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+// Cart logic with quantities
+let cart = {};
+function renderCart(){
+  const cartList = document.getElementById('cartList');
+  cartList.innerHTML='';
+  let subtotal=0;
+  for(const id in cart){
+    const p=products.find(x=>x.id===id);
+    subtotal += p.price*cart[id];
+    const el=document.createElement('div');
+    el.innerHTML=`${p.title} x ${cart[id]} = Rs. ${p.price*cart[id]} `+
+    `<button class='btn dec' data-id='${id}'>-</button> <button class='btn inc' data-id='${id}'>+</button>`;
+    cartList.appendChild(el);
+  }
+  document.getElementById('subtotal').innerText=`Rs. ${subtotal}`;
+}
+
+document.body.addEventListener('click', e=>{
+  if(e.target.classList.contains('add')){
+    const id=e.target.dataset.id;
+    cart[id]=(cart[id]||0)+1;
+    renderCart();
+  }
+  if(e.target.classList.contains('inc')){
+    const id=e.target.dataset.id;
+    cart[id]++;
+    renderCart();
+  }
+  if(e.target.classList.contains('dec')){
+    const id=e.target.dataset.id;
+    cart[id]--;
+    if(cart[id]<=0) delete cart[id];
+    renderCart();
+  }
+  if(e.target.id==='checkout'){
+    alert('Demo checkout. In real site, order would be sent.');
+  }
+});
+
+renderCart();
+</script>
+</body>
+</html>
