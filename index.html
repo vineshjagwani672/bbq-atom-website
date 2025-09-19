@@ -54,10 +54,7 @@
       </div>
       <div class="hero-content">
         <h2>Welcome to BBQ items</h2>
-        
-
         <p>Delicious BBQ & Fast Food — Delivered Fresh</p>
-        
       </div>
     </div>
   </header>
@@ -88,16 +85,19 @@
         <p>Welcome to BBQ items! Founded by <b>Vinesh Kumar</b>, our mission is to bring authentic BBQ and fast food flavours of Pakistan to your doorstep. We focus on quality, freshness, and customer satisfaction. Whether it’s a juicy burger, spicy kabab, or a crispy broast, we make sure every bite counts. Enjoy our delicious meals with friends and family, and don’t forget to try our amazing deals!</p>
       </div>
 
+      <!-- ✅ FIXED CONTACT FORM WITH FORMSPREE -->
       <div id="contact" class="contact">
         <h3>Contact & Home Delivery</h3>
         <p class="small">Owner: <b>Vinesh Kumar</b></p>
         <p class="small">Email: <span id="ownerEmail">vineshjagwani@gmail.com</span></p>
         <p class="small">Phone: 0315-3516936</p>
-        <form id="contactForm" style="display:flex;gap:8px;flex-direction:column;margin-top:8px">
-          <input id="contactName" placeholder="Your name" required />
-          <input id="contactPhone" placeholder="Phone or address" required />
-          <textarea id="contactMsg" placeholder="Message or delivery details" rows="3"></textarea>
-          <button class="btn" type="button" id="sendContact">Send Message</button>
+
+        <!-- Replace xyz123 with your Formspree endpoint -->
+        <form action="https://formspree.io/f/xyz123" method="POST" style="display:flex;gap:8px;flex-direction:column;margin-top:8px">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="text" name="phone" placeholder="Phone or address" required>
+          <textarea name="message" placeholder="Message or delivery details" rows="3" required></textarea>
+          <button class="btn" type="submit">Send Order</button>
         </form>
       </div>
     </section>
